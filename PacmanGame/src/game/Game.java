@@ -30,9 +30,11 @@ public class Game {
 		Pacman pacman = (Pacman) actors.get(0);
 		if (pacman.cells[pacman.getY()][pacman.getX()] == '2') {
 			pacman.score++;
+			pacman.countPill++;
 			pacman.cells[pacman.getY()][pacman.getX()] = '1';
 		} else if (pacman.cells[pacman.getY()][pacman.getX()] == '3') {
 			pacman.score = pacman.score + 20;
+			pacman.countPill++;
 			pacman.cells[pacman.getY()][pacman.getX()] = '1';
 			for (int i = 1; i <= 4; i++) {
 				Ghost ghost = (Ghost) actors.get(i);
@@ -55,6 +57,16 @@ public class Game {
 					ghost.dead = true;
 				}
 			}
+		}
+
+		if (pacman.countPill == pacman.totalPill) {
+			for (int i = 1; i <= 4; i++) {
+				Ghost ghost = (Ghost) actors.get(i);
+				pacman.dead = true;
+				ghost.dead = true;
+				pacman.over = true;
+			}
+
 		}
 	}
 

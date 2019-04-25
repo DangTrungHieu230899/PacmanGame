@@ -24,8 +24,12 @@ public class Pacman extends Actor {
 	public char[][] cells;
 	public int score;
 	public boolean dead;
+	public int totalPill;
+	public int countPill;
+	public boolean over;
 
 	public Pacman() {
+		over = false;
 		dead = false;
 		cells = mazes[mazeNo].getCells();
 		rows = mazes[mazeNo].rows;// 260
@@ -35,7 +39,8 @@ public class Pacman extends Actor {
 		x = mazes[mazeNo].column;
 
 		frame = 0;
-
+		totalPill = mazes[mazeNo].countPill;
+		countPill = 0;
 		curDir = reqDir = MOVE_RIGHT;
 
 		try {
@@ -149,6 +154,11 @@ public class Pacman extends Actor {
 		g.drawImage(packman.getSubimage((frame / 2) * distanceImage, (curDir - MOVE_LEFT) * distanceImage, widthPacman,
 				heightPacman), x * STEP - radius, y * STEP - radius, null);
 
+		if (over) {
+			g.setColor(new Color(100, 100, 100, 200));
+			g.fillRect(0, 0, 445, 510);
+			g.drawImage(pills.getSubimage(1, 79, 126, 38), 445 / 2, 510 / 2, null);
+		}
 	}
 
 }

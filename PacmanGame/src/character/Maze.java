@@ -5,16 +5,18 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Maze {
 	ArrayList<String> lines;
 	int row, column;
 	int rows, columns;
 	int row2, column2;
-
-	
+	int countPill;
 	// parameter load map
 	public Maze(int m) {
 		try {
+			countPill = 0;
 			lines = new ArrayList<String>();
 			Scanner s = new Scanner(new File("data.txt"));
 			int r = 0;
@@ -30,14 +32,19 @@ public class Maze {
 					row2 = r2;
 					column2 = line.indexOf('4');
 				}
+				for (int i=0; i<line.length(); i++) {
+					if (line.charAt(i) == '2') {
+						countPill++;
+					} else if (line.charAt(i) == '3') {
+						countPill++;					}
+				}
 				r++;
 				r2++;
 			}
 			s.close();
-			
-			//position start man
-			rows = lines.size();//260
-			columns = lines.get(0).length();//228
+		
+			rows = lines.size();
+			columns = lines.get(0).length();
 			
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
